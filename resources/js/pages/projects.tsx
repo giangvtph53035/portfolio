@@ -22,6 +22,7 @@ interface Project {
 interface ProjectsResponse {
     success: boolean;
     data: Project[];
+    message?: string;
     meta: {
         current_page: number;
         last_page: number;
@@ -211,6 +212,7 @@ export default function Projects() {
                                 <select
                                     value={selectedTechnology}
                                     onChange={(e) => setSelectedTechnology(e.target.value)}
+                                    title="Chọn công nghệ để lọc"
                                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                 >
                                     <option value="">Tất cả công nghệ</option>
@@ -234,6 +236,7 @@ export default function Projects() {
                                         setSortBy(sort);
                                         setSortDirection(direction);
                                     }}
+                                    title="Chọn cách sắp xếp"
                                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                 >
                                     <option value="updated_at-desc">Cập nhật mới nhất</option>

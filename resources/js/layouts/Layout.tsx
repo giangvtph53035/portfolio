@@ -39,31 +39,6 @@ export default function Layout({ children, title = 'Portfolio' }: LayoutProps) {
                                     </Link>
                                 </div>
                             </div>
-                            <div className="flex items-center gap-4">
-                                {auth.user ? (
-                                    <Link
-                                        href="/dashboard"
-                                        className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700"
-                                    >
-                                        Dashboard
-                                    </Link>
-                                ) : (
-                                    <>
-                                        <Link
-                                            href="/login"
-                                            className="text-gray-900 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium"
-                                        >
-                                            Đăng nhập
-                                        </Link>
-                                        <Link
-                                            href="/register"
-                                            className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700"
-                                        >
-                                            Đăng ký
-                                        </Link>
-                                    </>
-                                )}
-                            </div>
                         </div>
                     </div>
                 </nav>

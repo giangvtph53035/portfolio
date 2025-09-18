@@ -3,60 +3,68 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Services\GitHubProjectService;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
+    private $githubProjectService;
+
+    public function __construct(GitHubProjectService $githubProjectService)
+    {
+        $this->githubProjectService = $githubProjectService;
+    }
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request): JsonResponse
     {
-        $query = Project::query()->active()->published()->with('tags', 'media');
+        // Get filters from request
+        $filters = [
+            'featured' => $request->boolean('featured'),
+            'technology' => $request->get('technology'),
+            'search' => $request->get('search'),
+            'sort' => $request->get('sort', 'updated_at'),
+            'direction' => $request->get('direction', 'desc'),
+        ];
 
-        // Filter by featured
-        if ($request->boolean('featured')) {
-            $query->featured();
+        // Get projects from GitHub
+        $result = $this->githubProjectService->getAllProjects($filters);
+
+        if (!$result['success']) {
+            return response()->json([
+                'success' => false,
+                'message' => $result['message'],
+                'data' => [],
+                'meta' => [
+                    'current_page' => 1,
+                    'last_page' => 1,
+                    'per_page' => 0,
+                    'total' => 0,
+                ]
+            ], 500);
         }
 
-        // Filter by technology
-        if ($request->has('technology')) {
-            $technology = $request->get('technology');
-            $query->whereJsonContains('technologies', $technology);
-        }
-
-        // Search
-        if ($request->has('search')) {
-            $searchTerm = $request->get('search');
-            $query->where(function ($q) use ($searchTerm) {
-                $q->where('title', 'like', "%{$searchTerm}%")
-                  ->orWhere('description', 'like', "%{$searchTerm}%");
-            });
-        }
-
-        // Sort
-        $sortBy = $request->get('sort', 'sort_order');
-        $sortDirection = $request->get('direction', 'asc');
-        
-        if ($sortBy === 'sort_order') {
-            $query->ordered();
-        } else {
-            $query->orderBy($sortBy, $sortDirection);
-        }
+        $projects = $result['data'];
 
         // Pagination
         $perPage = min($request->get('per_page', 12), 50);
-        $projects = $query->paginate($perPage);
+        $page = $request->get('page', 1);
+        $total = count($projects);
+        $lastPage = ceil($total / $perPage);
+        
+        $paginatedProjects = array_slice($projects, ($page - 1) * $perPage, $perPage);
 
         return response()->json([
-            'data' => $projects->items(),
+            'success' => true,
+            'data' => $paginatedProjects,
             'meta' => [
-                'current_page' => $projects->currentPage(),
-                'last_page' => $projects->lastPage(),
-                'per_page' => $projects->perPage(),
-                'total' => $projects->total(),
+                'current_page' => (int) $page,
+                'last_page' => $lastPage,
+                'per_page' => (int) $perPage,
+                'total' => $total,
             ]
         ]);
     }
@@ -66,14 +74,19 @@ class ProjectController extends Controller
      */
     public function show($slug): JsonResponse
     {
-        $project = Project::where('slug', $slug)
-            ->active()
-            ->published()
-            ->with('tags', 'media')
-            ->firstOrFail();
+        // Get project from GitHub by repository name (slug)
+        $result = $this->githubProjectService->getProject($slug);
+
+        if (!$result['success']) {
+            return response()->json([
+                'success' => false,
+                'message' => $result['message']
+            ], 404);
+        }
 
         return response()->json([
-            'data' => $project
+            'success' => true,
+            'data' => $result['data']
         ]);
     }
 
@@ -166,16 +179,19 @@ class ProjectController extends Controller
      */
     public function featured(): JsonResponse
     {
-        $projects = Project::active()
-            ->published()
-            ->featured()
-            ->ordered()
-            ->with('tags', 'media')
-            ->limit(6)
-            ->get();
+        $result = $this->githubProjectService->getFeaturedProjects(6);
+
+        if (!$result['success']) {
+            return response()->json([
+                'success' => false,
+                'message' => $result['message'],
+                'data' => []
+            ], 500);
+        }
 
         return response()->json([
-            'data' => $projects
+            'success' => true,
+            'data' => $result['data']
         ]);
     }
 
@@ -184,16 +200,19 @@ class ProjectController extends Controller
      */
     public function technologies(): JsonResponse
     {
-        $technologies = Project::active()
-            ->published()
-            ->whereNotNull('technologies')
-            ->pluck('technologies')
-            ->flatten()
-            ->unique()
-            ->values();
+        $result = $this->githubProjectService->getTechnologies();
+
+        if (!$result['success']) {
+            return response()->json([
+                'success' => false,
+                'message' => $result['message'],
+                'data' => []
+            ], 500);
+        }
 
         return response()->json([
-            'data' => $technologies
+            'success' => true,
+            'data' => $result['data']
         ]);
     }
 }

@@ -114,7 +114,7 @@ export default function Home() {
                             </span>
                         </h1>
                         <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 mb-8">
-                            Nhà phát triển Full-Stack với đam mê tạo ra những sản phẩm công nghệ ý nghĩa
+                            Nhân viên lập trình Full-Stack
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
                             <Link
@@ -301,11 +301,11 @@ export default function Home() {
                                 Về tôi
                             </h2>
                             <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
-                                Tôi là một nhà phát triển Full-Stack với kinh nghiệm trong việc xây dựng 
-                                các ứng dụng web hiện đại. Tôi có đam mê với công nghệ mới và luôn tìm 
+                                Tôi là một thực tập sinh Full-Stack với một số kinh nghiệm trong việc xây dựng 
+                                các ứng dụng web . Tôi có đam mê với công nghệ mới và luôn tìm 
                                 cách cải thiện kỹ năng lập trình của mình.
                             </p>
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+                            <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
                                 <div className="text-center">
                                     <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
                                         {repositories.length}+
@@ -323,12 +323,6 @@ export default function Home() {
                                         {Array.from(new Set(repositories.flatMap(repo => repo.technologies))).length}+
                                     </div>
                                     <div className="text-gray-600 dark:text-gray-400">Công nghệ</div>
-                                </div>
-                                <div className="text-center">
-                                    <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
-                                        100%
-                                    </div>
-                                    <div className="text-gray-600 dark:text-gray-400">Đam mê</div>
                                 </div>
                             </div>
                         </div>

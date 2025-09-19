@@ -1,6 +1,8 @@
 import Layout from '@/layouts/Layout';
 import { Link } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
+import PersonalInfo from '@/components/PersonalInfo';
+import ContactInfo from '@/components/ContactInfo';
 
 interface Repository {
     id: number;
@@ -326,6 +328,18 @@ export default function Home() {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </section>
+
+                {/* Personal Information Section */}
+                <section className="container mx-auto px-6 py-16">
+                    <PersonalInfo />
+                </section>
+
+                {/* Contact Information Section */}
+                <section className="bg-gray-100 dark:bg-gray-800 py-16">
+                    <div className="container mx-auto px-6">
+                        <ContactInfo />
                     </div>
                 </section>
             </div>

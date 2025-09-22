@@ -1,6 +1,8 @@
 import { Head, Link } from '@inertiajs/react';
 import { type SharedData } from '@/types';
 import { usePage } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 interface LayoutProps {
     children: React.ReactNode;
@@ -9,6 +11,7 @@ interface LayoutProps {
 
 export default function Layout({ children, title = 'Portfolio' }: LayoutProps) {
     const { auth } = usePage<SharedData>().props;
+    const { t } = useTranslation();
 
     return (
         <>
@@ -29,15 +32,18 @@ export default function Layout({ children, title = 'Portfolio' }: LayoutProps) {
                                         href="/"
                                         className="text-gray-900 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium"
                                     >
-                                        Trang chủ
+                                        {t('common:home')}
                                     </Link>
                                     <Link
                                         href="/projects"
                                         className="text-gray-900 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium"
                                     >
-                                        Dự án
+                                        {t('common:projects')}
                                     </Link>
                                 </div>
+                            </div>
+                            <div className="flex items-center space-x-4">
+                                <LanguageSwitcher />
                             </div>
                         </div>
                     </div>

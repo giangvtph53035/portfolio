@@ -1,5 +1,6 @@
 import Layout from '@/layouts/Layout';
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface Project {
     id: number;
@@ -37,6 +38,7 @@ interface TechnologiesResponse {
 }
 
 export default function Projects() {
+    const { t } = useTranslation();
     const [projects, setProjects] = useState<Project[]>([]);
     const [technologies, setTechnologies] = useState<string[]>([]);
     const [loading, setLoading] = useState(true);

@@ -1,6 +1,7 @@
 import Layout from '@/layouts/Layout';
 import { Link } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import PersonalInfo from '@/components/PersonalInfo';
 import ContactInfo from '@/components/ContactInfo';
 
@@ -26,6 +27,7 @@ interface FeaturedProjectsResponse {
 }
 
 export default function Home() {
+    const { t } = useTranslation();
     const [repositories, setRepositories] = useState<Repository[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -104,32 +106,32 @@ export default function Home() {
     };
 
     return (
-        <Layout title="Portfolio - Giang Vũ">
+        <Layout title={`${t('common:home')} - ${t('common:name')}`}>
             <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
                 {/* Hero Section */}
                 <section className="container mx-auto px-6 pt-20 pb-16">
                     <div className="text-center max-w-4xl mx-auto">
                         <h1 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
-                            Xin chào, tôi là{' '}
+                            {t('common:hello')}{' '}
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                                Giang Vũ
+                                {t('common:name')}
                             </span>
                         </h1>
                         <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 mb-8">
-                            Nhân viên lập trình Full-Stack
+                            {t('common:role')}
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
                             <Link
                                 href="/projects"
                                 className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-colors duration-200"
                             >
-                                Xem dự án
+                                {t('common:view_projects')}
                             </Link>
                             <a
                                 href="#featured-projects"
                                 className="inline-flex items-center justify-center px-8 py-3 border border-gray-300 dark:border-gray-600 text-base font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
                             >
-                                Tìm hiểu thêm
+                                {t('common:learn_more')}
                             </a>
                         </div>
                     </div>
@@ -139,32 +141,30 @@ export default function Home() {
                 <section id="featured-projects" className="container mx-auto px-6 py-16">
                     <div className="text-center mb-12">
                         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-                            Dự án nổi bật
+                            {t('common:featured_projects')}
                         </h2>
                         <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-                            Một số dự án gần đây mà tôi đã phát triển từ GitHub repositories
+                            {t('common:some_recent_projects')}
                         </p>
                     </div>
 
-                    {loading && (
-                        <div className="flex justify-center items-center py-12">
-                            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-                        </div>
-                    )}
+                {loading && (
+                    <div className="flex justify-center items-center py-12">
+                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+                    </div>
+                )}
 
-                    {error && (
-                        <div className="text-center py-12">
-                            <p className="text-red-600 dark:text-red-400 mb-4">{error}</p>
-                            <button 
-                                onClick={fetchFeaturedRepositories}
-                                className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
-                            >
-                                Thử lại
-                            </button>
-                        </div>
-                    )}
-
-                    {!loading && !error && (
+                {error && (
+                    <div className="text-center py-12">
+                        <p className="text-red-600 dark:text-red-400 mb-4">{error}</p>
+                        <button 
+                            onClick={fetchFeaturedRepositories}
+                            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+                        >
+                            {t('common:try_again')}
+                        </button>
+                    </div>
+                )}                    {!loading && !error && (
                         <>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
                                 {repositories.map((repo) => (
@@ -206,7 +206,7 @@ export default function Home() {
 
                                             {/* Description */}
                                             <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">
-                                                {repo.description || 'Chưa có mô tả'}
+                                                {repo.description || t('common:no_description')}
                                             </p>
 
                                             {/* Technologies */}
@@ -248,7 +248,7 @@ export default function Home() {
 
                                             {/* Date */}
                                             <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
-                                                Cập nhật: {formatDate(repo.updated_at)}
+                                                {t('common:updated')}: {formatDate(repo.updated_at)}
                                             </p>
 
                                             {/* Action buttons */}
@@ -260,7 +260,7 @@ export default function Home() {
                                                         rel="noopener noreferrer"
                                                         className="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-center py-2 px-4 rounded-lg transition-colors duration-200 font-medium"
                                                     >
-                                                        Demo
+                                                        {t('common:demo')}
                                                     </a>
                                                 )}
                                                 {repo.github_url && (
@@ -270,7 +270,7 @@ export default function Home() {
                                                         rel="noopener noreferrer"
                                                         className="flex-1 bg-gray-600 hover:bg-gray-700 text-white text-center py-2 px-4 rounded-lg transition-colors duration-200 font-medium"
                                                     >
-                                                        GitHub
+                                                        {t('common:github')}
                                                     </a>
                                                 )}
                                             </div>
@@ -285,7 +285,7 @@ export default function Home() {
                                     href="/projects"
                                     className="inline-flex items-center px-6 py-3 border border-gray-300 dark:border-gray-600 text-base font-medium rounded-lg text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
                                 >
-                                    Xem tất cả dự án
+                                    {t('common:view_all_projects')}
                                     <svg className="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                                         <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
                                     </svg>
@@ -300,31 +300,29 @@ export default function Home() {
                     <div className="container mx-auto px-6">
                         <div className="text-center max-w-3xl mx-auto">
                             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
-                                Về tôi
+                                {t('common:about_me')}
                             </h2>
                             <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
-                                Tôi là một thực tập sinh Full-Stack với một số kinh nghiệm trong việc xây dựng 
-                                các ứng dụng web . Tôi có đam mê với công nghệ mới và luôn tìm 
-                                cách cải thiện kỹ năng lập trình của mình.
+                                {t('common:full_stack_intern')}
                             </p>
                             <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
                                 <div className="text-center">
                                     <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
                                         {repositories.length}+
                                     </div>
-                                    <div className="text-gray-600 dark:text-gray-400">Dự án</div>
+                                    <div className="text-gray-600 dark:text-gray-400">{t('common:projects')}</div>
                                 </div>
                                 <div className="text-center">
                                     <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
                                         {repositories.reduce((sum, repo) => sum + repo.stargazers_count, 0)}+
                                     </div>
-                                    <div className="text-gray-600 dark:text-gray-400">GitHub Stars</div>
+                                    <div className="text-gray-600 dark:text-gray-400">{t('common:github_stars')}</div>
                                 </div>
                                 <div className="text-center">
                                     <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
                                         {Array.from(new Set(repositories.flatMap(repo => repo.technologies))).length}+
                                     </div>
-                                    <div className="text-gray-600 dark:text-gray-400">Công nghệ</div>
+                                    <div className="text-gray-600 dark:text-gray-400">{t('common:technologies')}</div>
                                 </div>
                             </div>
                         </div>

@@ -1,14 +1,17 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface ContactInfoProps {
     className?: string;
 }
 
 export default function ContactInfo({ className = '' }: ContactInfoProps) {
+    const { t } = useTranslation();
+    
     const contactMethods = [
         {
             type: 'email',
-            label: 'Email',
+            label: t('common:email'),
             value: 'gvutruong871@gmail.com',
             href: 'mailto:gvutruong871@gmail.com',
             icon: (
@@ -20,7 +23,7 @@ export default function ContactInfo({ className = '' }: ContactInfoProps) {
         },
         {
             type: 'phone',
-            label: 'Điện thoại',
+            label: t('common:phone'),
             value: '+84 349370112',
             href: 'tel:+84349370112',
             icon: (
@@ -58,10 +61,10 @@ export default function ContactInfo({ className = '' }: ContactInfoProps) {
         <div className={`bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 ${className}`}>
             <div className="text-center mb-8">
                 <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-                    Liên hệ với tôi
+                    {t('common:contact_me')}
                 </h2>
                 <p className="text-gray-600 dark:text-gray-400">
-                    Hãy kết nối và thảo luận về các cơ hội hợp tác
+                    {t('common:contact_description')}
                 </p>
             </div>
 
@@ -100,7 +103,7 @@ export default function ContactInfo({ className = '' }: ContactInfoProps) {
             {/* Social Media */}
             <div className="border-t border-gray-200 dark:border-gray-600 pt-8">
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 text-center">
-                    Mạng xã hội
+                    {t('common:social_media')}
                 </h3>
                 <div className="flex justify-center space-x-6">
                     {socialLinks.map((social) => (
@@ -122,16 +125,16 @@ export default function ContactInfo({ className = '' }: ContactInfoProps) {
             <div className="mt-8 text-center">
                 <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-lg p-6">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                        Sẵn sàng hợp tác?
+                        {t('common:ready_to_collaborate')}
                     </h3>
                     <p className="text-gray-600 dark:text-gray-400 mb-4">
-                        Tôi luôn mở lòng với các dự án thú vị và cơ hội học hỏi mới
+                        {t('common:collaboration_description')}
                     </p>
                     <a
                         href="mailto:giangvtph53035@fpt.edu.vn"
                         className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200"
                     >
-                        Gửi email cho tôi
+                        {t('common:send_email')}
                         <svg className="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                             <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />

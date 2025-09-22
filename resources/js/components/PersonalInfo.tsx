@@ -1,10 +1,13 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface PersonalInfoProps {
     className?: string;
 }
 
 export default function PersonalInfo({ className = '' }: PersonalInfoProps) {
+    const { t } = useTranslation();
+    
     return (
         <div className={`bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 ${className}`}>
             <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
@@ -18,25 +21,22 @@ export default function PersonalInfo({ className = '' }: PersonalInfoProps) {
                 {/* Personal Information */}
                 <div className="flex-1 text-center md:text-left">
                     <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">
-                        Vũ Trường Giang
+                        {t('common:name')}
                     </h2>
                     <p className="text-xl text-blue-600 dark:text-blue-400 font-semibold mb-4">
-                        Full-Stack Developer
+                        {t('common:role')}
                     </p>
                     
                     <div className="prose prose-lg dark:prose-invert max-w-none">
                         <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
-                            Là một Full-Stack Developer đam mê công nghệ, tôi có kinh nghiệm phát triển 
-                            các ứng dụng web hiện đại sử dụng React, Laravel, và các công nghệ tiên tiến khác. 
-                            Tôi luôn tìm kiếm cơ hội để học hỏi và áp dụng những công nghệ mới nhất 
-                            vào các dự án thực tế.
+                            {t('common:bio_content')}
                         </p>
                     </div>
 
                     {/* Skills */}
                     <div className="mb-6">
                         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
-                            Kỹ năng chính
+                            {t('common:skills')}
                         </h3>
                         <div className="flex flex-wrap gap-2">
                             {[

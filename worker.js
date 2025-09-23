@@ -2,7 +2,8 @@
 // This worker will handle API requests and forward them to your Laravel backend
 
 export default {
-  async fetch(request, env, ctx) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async fetch(request, env, _ctx) {
     const url = new URL(request.url);
     
     // Handle CORS

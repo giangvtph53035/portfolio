@@ -1,6 +1,5 @@
 import Layout from '@/layouts/Layout';
-import { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useState, useEffect, useCallback } from 'react';
 
 interface Project {
     id: number;
@@ -38,7 +37,6 @@ interface TechnologiesResponse {
 }
 
 export default function Projects() {
-    const { t } = useTranslation();
     const [projects, setProjects] = useState<Project[]>([]);
     const [technologies, setTechnologies] = useState<string[]>([]);
     const [loading, setLoading] = useState(true);
@@ -54,35 +52,7 @@ export default function Projects() {
     const [sortBy, setSortBy] = useState('updated_at');
     const [sortDirection, setSortDirection] = useState('desc');
 
-    useEffect(() => {
-        fetchTechnologies();
-    }, []);
-
-    useEffect(() => {
-        setCurrentPage(1); // Reset to first page when filters change
-    }, [searchTerm, selectedTechnology, showFeaturedOnly, sortBy, sortDirection]);
-
-    useEffect(() => {
-        fetchProjects();
-    }, [currentPage, searchTerm, selectedTechnology, showFeaturedOnly, sortBy, sortDirection]);
-
-    const fetchTechnologies = async () => {
-        try {
-            const baseUrl = window.location.origin;
-            const response = await fetch(`${baseUrl}/api/v1/projects/technologies`);
-            
-            if (response.ok) {
-                const data: TechnologiesResponse = await response.json();
-                if (data.success) {
-                    setTechnologies(data.data);
-                }
-            }
-        } catch (err) {
-            console.error('Failed to fetch technologies:', err);
-        }
-    };
-
-    const fetchProjects = async () => {
+    const fetchProjects = useCallback(async () => {
         try {
             setLoading(true);
             setError(null);
@@ -126,6 +96,34 @@ export default function Projects() {
             setError(err instanceof Error ? err.message : 'An error occurred');
         } finally {
             setLoading(false);
+        }
+    }, [currentPage, searchTerm, selectedTechnology, showFeaturedOnly, sortBy, sortDirection]);
+
+    useEffect(() => {
+        fetchTechnologies();
+    }, []);
+
+    useEffect(() => {
+        setCurrentPage(1); // Reset to first page when filters change
+    }, [searchTerm, selectedTechnology, showFeaturedOnly, sortBy, sortDirection]);
+
+    useEffect(() => {
+        fetchProjects();
+    }, [fetchProjects]);
+
+    const fetchTechnologies = async () => {
+        try {
+            const baseUrl = window.location.origin;
+            const response = await fetch(`${baseUrl}/api/v1/projects/technologies`);
+            
+            if (response.ok) {
+                const data: TechnologiesResponse = await response.json();
+                if (data.success) {
+                    setTechnologies(data.data);
+                }
+            }
+        } catch (err) {
+            console.error('Failed to fetch technologies:', err);
         }
     };
 

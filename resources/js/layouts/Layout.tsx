@@ -1,6 +1,4 @@
 import { Head, Link } from '@inertiajs/react';
-import { type SharedData } from '@/types';
-import { usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 
@@ -10,7 +8,6 @@ interface LayoutProps {
 }
 
 export default function Layout({ children, title = 'Portfolio' }: LayoutProps) {
-    const { auth } = usePage<SharedData>().props;
     const { t } = useTranslation();
 
     return (

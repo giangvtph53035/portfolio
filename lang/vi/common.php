@@ -31,4 +31,15 @@ return [
     'found_projects' => 'Tìm thấy :count dự án',
     'github_stars' => 'GitHub Stars',
     'no_description' => 'Chưa có mô tả',
+    
+    // Contact Info
+    'email' => 'Email',
+    'phone' => 'Điện thoại',
+    'contact_me' => 'Liên hệ với tôi',
+    'contact_description' => 'Tôi luôn sẵn sàng thảo luận về các dự án mới và cơ hội hợp tác.',
+    'social_media' => 'Mạng xã hội',
+    'ready_to_collaborate' => 'Sẵn sàng hợp tác?',
+    'collaboration_description' => 'Hãy cùng nhau tạo ra những điều tuyệt vời!',
+    'send_email' => 'Gửi Email',
+    'email_subject' => 'Liên hệ từ Portfolio',
 ];

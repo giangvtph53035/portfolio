@@ -31,4 +31,15 @@ return [
     'found_projects' => 'Found :count projects',
     'github_stars' => 'GitHub Stars',
     'no_description' => 'No description available',
+    
+    // Contact Info
+    'email' => 'Email',
+    'phone' => 'Phone',
+    'contact_me' => 'Contact Me',
+    'contact_description' => 'I\'m always open to discussing new projects and opportunities.',
+    'social_media' => 'Social Media',
+    'ready_to_collaborate' => 'Ready to Collaborate?',
+    'collaboration_description' => 'Let\'s create something amazing together!',
+    'send_email' => 'Send Email',
+    'email_subject' => 'Contact from Portfolio',
 ];

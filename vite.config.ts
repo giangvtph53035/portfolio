@@ -16,7 +16,7 @@ export default defineConfig(({ command }) => {
     ];
 
     // Only add wayfinder plugin in development (not for Cloudflare build)
-    if (command === 'serve' || process.env.NODE_ENV !== 'production') {
+    if (command === 'serve') {
         plugins.push(wayfinder({
             formVariants: true,
         }));

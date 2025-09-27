@@ -180,7 +180,7 @@ export default function ContactInfo({ className = '' }: ContactInfoProps) {
                         href="#"
                         onClick={(e) => {
                             e.preventDefault();
-                            handleEmailClick('giangvtph53035@fpt.edu.vn');
+                            handleEmailClick('giangvtph53035@gmail.com');
                         }}
                         className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200"
                     >

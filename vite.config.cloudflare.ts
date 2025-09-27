@@ -22,7 +22,7 @@ export default defineConfig({
                 filesToCopy.forEach(file => {
                     if (existsSync(file)) {
                         const filename = file.split('/').pop();
-                        copyFileSync(file, `dist/${filename}`);
+                        copyFileSync(file, `public/${filename}`);
                     }
                 });
             }
@@ -37,8 +37,8 @@ export default defineConfig({
         jsx: 'automatic',
     },
     build: {
-        outDir: 'dist',
-        emptyOutDir: true,
+        outDir: 'public',
+        emptyOutDir: false, // Don't delete existing files in public
         rollupOptions: {
             input: './index.html',
         },

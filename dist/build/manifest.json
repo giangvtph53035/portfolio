@@ -1,0 +1,99 @@
+{
+  "_Layout-WWgFG5me.js": {
+    "file": "assets/Layout-WWgFG5me.js",
+    "name": "Layout",
+    "imports": [
+      "resources/js/app.tsx",
+      "_dropdown-menu-B0vtu91y.js"
+    ]
+  },
+  "_dropdown-menu-B0vtu91y.js": {
+    "file": "assets/dropdown-menu-B0vtu91y.js",
+    "name": "dropdown-menu",
+    "imports": [
+      "resources/js/app.tsx"
+    ]
+  },
+  "_simple-routes-C29q9Zpb.js": {
+    "file": "assets/simple-routes-C29q9Zpb.js",
+    "name": "simple-routes"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-Ca5PJ6be.css",
+    "src": "resources/css/app.css",
+    "isEntry": true,
+    "names": [
+      "app.css"
+    ]
+  },
+  "resources/js/app.tsx": {
+    "file": "assets/app-Bzo11VJq.js",
+    "name": "app",
+    "src": "resources/js/app.tsx",
+    "isEntry": true,
+    "dynamicImports": [
+      "resources/js/pages/dashboard.tsx",
+      "resources/js/pages/home.tsx",
+      "resources/js/pages/projects.tsx",
+      "resources/js/pages/welcome.tsx"
+    ],
+    "css": [
+      "assets/app-Ca5PJ6be.css"
+    ]
+  },
+  "resources/js/pages/dashboard.tsx": {
+    "file": "assets/dashboard-BYBxV9s4.js",
+    "name": "dashboard",
+    "src": "resources/js/pages/dashboard.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.tsx",
+      "_dropdown-menu-B0vtu91y.js",
+      "_simple-routes-C29q9Zpb.js"
+    ],
+    "css": [
+      "assets/app-Ca5PJ6be.css"
+    ]
+  },
+  "resources/js/pages/home.tsx": {
+    "file": "assets/home-C7XA0YFD.js",
+    "name": "home",
+    "src": "resources/js/pages/home.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.tsx",
+      "_Layout-WWgFG5me.js",
+      "_dropdown-menu-B0vtu91y.js"
+    ],
+    "css": [
+      "assets/app-Ca5PJ6be.css"
+    ]
+  },
+  "resources/js/pages/projects.tsx": {
+    "file": "assets/projects-BxiDGd41.js",
+    "name": "projects",
+    "src": "resources/js/pages/projects.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.tsx",
+      "_Layout-WWgFG5me.js",
+      "_dropdown-menu-B0vtu91y.js"
+    ],
+    "css": [
+      "assets/app-Ca5PJ6be.css"
+    ]
+  },
+  "resources/js/pages/welcome.tsx": {
+    "file": "assets/welcome-BIYYuxCs.js",
+    "name": "welcome",
+    "src": "resources/js/pages/welcome.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.tsx",
+      "_simple-routes-C29q9Zpb.js"
+    ],
+    "css": [
+      "assets/app-Ca5PJ6be.css"
+    ]
+  }
+}

@@ -4,8 +4,7 @@
     "scripts": {
         "build": "vite build",
         "build:ssr": "vite build && vite build --ssr",
-        "build:cloudflare": "vite build --config vite.config.cloudflare.ts && npm run copy:assets",
-        "copy:assets": "xcopy public\\favicon.* dist\\ /Y && xcopy public\\apple-touch-icon.png dist\\ /Y && xcopy public\\robots.txt dist\\ /Y && xcopy public\\logo.svg dist\\ /Y && xcopy public\\_redirects dist\\ /Y",
+        "build:cloudflare": "vite build --config vite.config.cloudflare.ts",
         "build:production": "npm run build:cloudflare",
         "dev": "vite",
         "dev:worker": "wrangler dev",

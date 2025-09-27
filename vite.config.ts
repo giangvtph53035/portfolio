@@ -1,11 +1,10 @@
-import { wayfinder } from '@laravel/vite-plugin-wayfinder';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import laravel from 'laravel-vite-plugin';
 import { defineConfig } from 'vite';
 
 export default defineConfig(({ command }) => {
-    const basePlugins = [
+    const plugins = [
         laravel({
             input: ['resources/css/app.css', 'resources/js/app.tsx'],
             ssr: 'resources/js/ssr.tsx',
@@ -15,10 +14,8 @@ export default defineConfig(({ command }) => {
         tailwindcss(),
     ];
 
-    // Only add wayfinder plugin when serving in development
-    const plugins = command === 'serve'
-        ? [...basePlugins, wayfinder({ formVariants: true })]
-        : basePlugins;
+    // Don't add wayfinder plugin for production builds
+    // It will be added through Laravel plugin when running dev server
 
     return {
         plugins,

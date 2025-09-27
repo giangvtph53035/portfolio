@@ -41,8 +41,8 @@ export default function Home() {
             setLoading(true);
             setError(null);
             
-            const baseUrl = window.location.origin;
-            const apiUrl = `${baseUrl}/api/v1/projects/featured`;
+            // Always use Cloudflare Worker API
+            const apiUrl = 'https://portfolio-api.giangvtph53035.workers.dev/api/v1/projects/featured';
             console.log('Fetching from:', apiUrl);
             
             const response = await fetch(apiUrl, {

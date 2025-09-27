@@ -12,15 +12,8 @@ export const useLanguage = () => {
             // Change language in i18next
             await i18n.changeLanguage(lng);
             
-            // Also send to backend to sync session
-            await fetch('/api/v1/locale', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                },
-                body: JSON.stringify({ locale: lng }),
-            });
+            // Note: Language preference is stored client-side only
+            // No need to sync with backend for static deployment
             
         } catch (error) {
             console.error('Error changing language:', error);

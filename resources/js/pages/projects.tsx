@@ -68,8 +68,8 @@ export default function Projects() {
             if (sortBy) params.append('sort', sortBy);
             if (sortDirection) params.append('direction', sortDirection);
             
-            const baseUrl = window.location.origin;
-            const response = await fetch(`${baseUrl}/api/v1/projects?${params.toString()}`, {
+            // Always use Cloudflare Worker API
+            const response = await fetch(`https://portfolio-api.giangvtph53035.workers.dev/api/v1/projects?${params.toString()}`, {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',
@@ -113,8 +113,8 @@ export default function Projects() {
 
     const fetchTechnologies = async () => {
         try {
-            const baseUrl = window.location.origin;
-            const response = await fetch(`${baseUrl}/api/v1/projects/technologies`);
+            // Always use Cloudflare Worker API
+            const response = await fetch('https://portfolio-api.giangvtph53035.workers.dev/api/v1/projects/technologies');
             
             if (response.ok) {
                 const data: TechnologiesResponse = await response.json();

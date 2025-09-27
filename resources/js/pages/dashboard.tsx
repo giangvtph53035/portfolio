@@ -1,13 +1,13 @@
 import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
 import AppLayout from '@/layouts/app-layout';
-import { home } from '@/routes';
+import { home } from '@/routes/simple-routes';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
 
 const breadcrumbItems: BreadcrumbItem[] = [
     {
         title: 'Trang chủ',
-        href: home().url,
+        href: home(),
     },
     {
         title: 'Dashboard',

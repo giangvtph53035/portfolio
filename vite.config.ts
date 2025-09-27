@@ -15,8 +15,8 @@ export default defineConfig(({ command }) => {
         tailwindcss(),
     ];
 
-    // Only add wayfinder plugin in development (not for Cloudflare build)
-    const plugins = command === 'serve' 
+    // Only add wayfinder plugin when serving in development
+    const plugins = command === 'serve'
         ? [...basePlugins, wayfinder({ formVariants: true })]
         : basePlugins;
 

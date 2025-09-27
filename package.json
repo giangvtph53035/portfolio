@@ -4,7 +4,7 @@
     "scripts": {
         "build": "vite build",
         "build:ssr": "vite build && vite build --ssr",
-        "build:cloudflare": "cross-env NODE_ENV=production vite build --outDir=public/build --emptyOutDir=false",
+        "build:cloudflare": "vite build --outDir=public/build --emptyOutDir=false",
         "build:production": "npm run build:cloudflare",
         "dev": "vite",
         "dev:worker": "wrangler dev",

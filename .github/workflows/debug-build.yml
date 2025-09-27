@@ -1,0 +1,32 @@
+# Debug build for Cloudflare Pages
+name: Debug Build
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  debug-build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Build for production
+      run: npm run build:production
+    
+    - name: List build output
+      run: |
+        echo "=== Build output structure ==="
+        find dist -type f -name "*.html" -o -name "*.js" -o -name "*.css" | head -20
+        echo "=== Index.html content ==="
+        cat dist/index.html
+        echo "=== Build completed ==="

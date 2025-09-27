@@ -5,7 +5,7 @@ import laravel from 'laravel-vite-plugin';
 import { defineConfig } from 'vite';
 
 export default defineConfig(({ command }) => {
-    const plugins = [
+    const basePlugins = [
         laravel({
             input: ['resources/css/app.css', 'resources/js/app.tsx'],
             ssr: 'resources/js/ssr.tsx',
@@ -16,11 +16,9 @@ export default defineConfig(({ command }) => {
     ];
 
     // Only add wayfinder plugin in development (not for Cloudflare build)
-    if (command === 'serve') {
-        plugins.push(wayfinder({
-            formVariants: true,
-        }));
-    }
+    const plugins = command === 'serve' 
+        ? [...basePlugins, wayfinder({ formVariants: true })]
+        : basePlugins;
 
     return {
         plugins,

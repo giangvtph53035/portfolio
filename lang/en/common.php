@@ -9,7 +9,6 @@ return [
     'all_projects' => 'All Projects',
     'view_projects' => 'View Projects',
     'view_all_projects' => 'View All Projects',
-    'learn_more' => 'Learn More',
     'contact' => 'Contact',
     'projects' => 'Projects',
     'project' => 'Project',

@@ -9,7 +9,6 @@ return [
     'all_projects' => 'Tất cả dự án',
     'view_projects' => 'Xem dự án',
     'view_all_projects' => 'Xem tất cả dự án',
-    'learn_more' => 'Tìm hiểu thêm',
     'contact' => 'Liên hệ',
     'projects' => 'Dự án',
     'project' => 'Dự án',

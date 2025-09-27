@@ -1,0 +1,22 @@
+name = "portfolio-api"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Environment variables - Set these in Cloudflare Dashboard
+[vars]
+NODE_ENV = "production"
+
+# You'll need to set these secrets via: wrangler secret put <NAME>
+# GITHUB_TOKEN = "your_github_token_here"
+# GITHUB_USERNAME = "your_github_username"
+
+# Worker configuration
+[env.production]
+name = "portfolio-api"
+vars = { NODE_ENV = "production" }
+
+# For local development
+[env.dev]
+name = "portfolio-api-dev"
+vars = { NODE_ENV = "development" }

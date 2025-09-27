@@ -4,14 +4,19 @@
     "scripts": {
         "build": "vite build",
         "build:ssr": "vite build && vite build --ssr",
-        "build:cloudflare": "npm run build && npm run build:ssr",
+        "build:cloudflare": "vite build --outDir=public/build --emptyOutDir=false",
+        "build:production": "npm run build:cloudflare",
         "dev": "vite",
+        "dev:worker": "wrangler dev",
+        "deploy:worker": "wrangler deploy",
+        "deploy:full": "npm run build:production && npm run deploy:worker",
         "format": "prettier --write resources/",
         "format:check": "prettier --check resources/",
         "lint": "eslint . --fix",
         "types": "tsc --noEmit",
         "preview": "vite preview",
-        "prepare:deploy": "composer install --no-dev --optimize-autoloader && npm run build:cloudflare"
+        "worker:secrets": "echo 'Run: wrangler secret put GITHUB_TOKEN && wrangler secret put GITHUB_USERNAME'",
+        "prepare:deploy": "npm run build:production && echo 'Ready for Cloudflare Pages deployment!'"
     },
     "devDependencies": {
         "@eslint/js": "^9.19.0",

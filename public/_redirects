@@ -1,0 +1,18 @@
+# Redirect all requests to index.html for client-side routing
+/*    /index.html   200
+
+# API routes should not be redirected
+/api/*    /api/:splat   200
+
+# Static assets should be served as-is
+/build/*    /build/:splat   200
+/assets/*   /assets/:splat  200
+/images/*   /images/:splat  200
+/css/*      /css/:splat     200
+/js/*       /js/:splat      200
+
+# Favicon and other root files
+/favicon.ico    /favicon.ico    200
+/favicon.svg    /favicon.svg    200
+/robots.txt     /robots.txt     200
+/apple-touch-icon.png   /apple-touch-icon.png   200

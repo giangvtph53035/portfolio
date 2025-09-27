@@ -20,4 +20,14 @@ export default defineConfig({
     esbuild: {
         jsx: 'automatic',
     },
+    build: {
+        outDir: 'dist',
+        emptyOutDir: true,
+        rollupOptions: {
+            output: {
+                manualChunks: undefined,
+            },
+        },
+    },
+    base: process.env.NODE_ENV === 'production' ? '/' : '/',
 });

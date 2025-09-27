@@ -1,4 +1,4 @@
-import { home } from '@/routes';
+import { home } from '@/routes/simple-routes';
 import { type SharedData } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
 
